@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /**
- * Copyright (c) 2014 SlimRoms Project
+ * Copyright (c) 2014-2015 SlimRoms Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@
 
     <!--ScreenShot Trash-->
     <string name="screenshot_notification_delete">Delete</string>
+
     <string name="screenshot_delete_confirmation">Screenshot deleted.</string>
 
     <!-- Battery level text while charging [CHAR LIMIT=2] -->

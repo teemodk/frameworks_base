@@ -77,6 +77,8 @@ import android.text.TextUtils;
 
 import com.android.internal.R;
 import com.android.internal.app.IBatteryStats;
+import com.android.internal.telephony.IccCardConstants;
+import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.util.AsyncChannel;
 import com.android.internal.util.Protocol;
 import com.android.internal.util.State;

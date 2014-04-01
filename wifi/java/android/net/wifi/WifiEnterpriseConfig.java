@@ -278,8 +278,8 @@ public class WifiEnterpriseConfig implements Parcelable {
 
     /**
      * Set the EAP authentication method.
-     * @param  eapMethod is one {@link Eap#PEAP}, {@link Eap#TLS}, {@link Eap#TTLS},
-     *                   {@link Eap#PWD}, {@link Eap#SIM} or {@link Eap#AKA}
+     * @param  eapMethod is one {@link Eap#PEAP}, {@link Eap#TLS}, {@link Eap#TTLS} or
+     *                   {@link Eap#PWD}
      * @throws IllegalArgumentException on an invalid eap method
      */
     public void setEapMethod(int eapMethod) {

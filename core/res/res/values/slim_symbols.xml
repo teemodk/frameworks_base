@@ -189,5 +189,7 @@
   <!-- CPU Boost on Wake -->
   <java-symbol type="bool" name="config_cpuBoostOnWake" />
 
-</resources>
+    <!-- Blur effects -->
+    <java-symbol type="bool" name="config_ui_blur_enabled" />
 
+</resources>

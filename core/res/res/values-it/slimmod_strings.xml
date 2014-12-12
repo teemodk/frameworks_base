@@ -31,4 +31,8 @@
     <!-- Flashlight notification -->
     <string name="notification_flashlight_on_title">Torcia attiva</string>
     <string name="notification_flashlight_on_summary">Tappa per spegnere</string>
+
+    <!-- Heads up -->
+    <string name="permlab_changeHeadsUpState">attiva o disattiva heads up</string>
+    <string name="permdesc_changeHeadsUpState">Permetti alle altre app di mostrare le notifiche come heads up.</string>
 </resources>

@@ -75,4 +75,10 @@
     <!-- no interuptions except alarms -->
     <string name="zen_no_interruptions_but_alarm">No interruzioni eccetto le sveglie.</string>
 
+    <!-- Heads up -->
+    <string name="heads_up_snooze_message">Heads up disattivate per <xliff:g id="number">%d</xliff:g> minuti.</string>
+    <string name="heads_up_snooze_button_title">Disattiva temporaneamente heads up</string>
+    <string name="notification_inspect_heads_up_title_enabled">Attiva heads up per questa app</string>
+    <string name="notification_inspect_heads_up_title_disabled">Disattiva heads up per questa app</string>
+
 </resources>

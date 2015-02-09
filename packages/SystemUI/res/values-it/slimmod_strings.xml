@@ -46,4 +46,7 @@
 
     <!-- Smart PullDown Warning -->
     <string name="smart_pulldown_disabled">Il pulldown intelligente è disattivato</string>
+
+    <string name="quick_settings_battery_saver">Risparmio batteria</string>
+    <string name="quick_settings_battery_saver_off">Risparmio batteria off</string>
 </resources>

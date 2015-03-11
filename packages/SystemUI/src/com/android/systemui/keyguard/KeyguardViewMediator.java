@@ -261,6 +261,8 @@ public class KeyguardViewMediator extends SystemUI {
 
     private boolean mScreenOn;
 
+    private boolean mDismissSecurelyOnScreenOn = false;
+
     // last known state of the cellular connection
     private String mPhoneState = TelephonyManager.EXTRA_STATE_IDLE;
 
@@ -745,6 +747,10 @@ public class KeyguardViewMediator extends SystemUI {
             if (callback != null) {
                 notifyScreenOnLocked(callback);
             }
+            if (mDismissSecurelyOnScreenOn) {
+                mDismissSecurelyOnScreenOn = false;
+                dismiss();
+            }
         }
         KeyguardUpdateMonitor.getInstance(mContext).dispatchScreenTurnedOn();
         maybeSendUserPresentBroadcast();
@@ -1189,7 +1195,11 @@ public class KeyguardViewMediator extends SystemUI {
                 }
             } else if (DISMISS_KEYGUARD_SECURELY_ACTION.equals(intent.getAction())) {
                 synchronized (KeyguardViewMediator.this) {
-                    dismiss();
+                    if (mScreenOn) {
+                        dismiss();
+                    } else {
+                        mDismissSecurelyOnScreenOn = true;
+                    }
                 }
             } else if (KEYGUARD_SERVICE_ACTION_STATE_CHANGE.equals(intent.getAction())) {
                 mKeyguardBound = intent.getBooleanExtra(KEYGUARD_SERVICE_EXTRA_ACTIVE, false);

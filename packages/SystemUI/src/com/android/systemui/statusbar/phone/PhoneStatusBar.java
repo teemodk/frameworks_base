@@ -483,7 +483,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     }
             }
             update();
-
+        }
 
         public void update() {
             ContentResolver resolver = mContext.getContentResolver();

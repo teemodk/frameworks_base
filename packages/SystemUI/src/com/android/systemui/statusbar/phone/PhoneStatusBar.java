@@ -169,7 +169,6 @@ import com.android.systemui.statusbar.policy.BluetoothControllerImpl;
 import com.android.systemui.statusbar.policy.BrightnessMirrorController;
 import com.android.systemui.statusbar.policy.CastControllerImpl;
 import com.android.systemui.statusbar.policy.Clock;
-import com.android.systemui.statusbar.policy.FlashlightController;
 import com.android.systemui.statusbar.policy.HeadsUpNotificationView;
 import com.android.systemui.statusbar.policy.HotspotControllerImpl;
 import com.android.systemui.statusbar.policy.KeyButtonView;

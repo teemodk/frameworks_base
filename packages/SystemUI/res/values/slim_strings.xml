@@ -70,4 +70,7 @@
     <!-- Announcement made when ambient display changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient Display turned on.</string>
 
+    <!-- SU notification -->
+    <string name="su_session_active">SU session active</string>
+
 </resources>

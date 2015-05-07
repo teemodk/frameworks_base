@@ -458,6 +458,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.BATTERY_SAVER_MODE_COLOR),
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.SU_INDICATOR),
                     false, this, UserHandle.USER_ALL);
             update();
         }
@@ -481,8 +483,16 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         mBatterySaverWarningColor = mContext.getResources()
                                 .getColor(com.android.internal.R.color.battery_saver_mode_color);
                     }
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL))
+                || uri.equals(Settings.System.getUriFor(
+                    Settings.System.SCREEN_BRIGHTNESS_MODE))) {
+                update();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.SU_INDICATOR))) {
+                mSuController.updateNotification();
+                mSuController.fireCallbacks();
             }
-            update();
         }
 
         public void update() {

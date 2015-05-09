@@ -26,15 +26,12 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.net.ConnectivityManager;
 import android.nfc.NfcAdapter;
-import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.internal.telephony.PhoneConstants;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class QSUtils {
     private static boolean sAvailableTilesFiltered;
@@ -47,20 +44,8 @@ public class QSUtils {
     }
 
     public static List<String> getDefaultTiles(Context context) {
-        final List<String> tiles = new ArrayList<>();
-        final String defaults = context.getString(
-                com.android.internal.R.string.config_defaultQuickSettingsTiles);
-        if (!TextUtils.isEmpty(defaults)) {
-            final String[] array = TextUtils.split(defaults, Pattern.quote(","));
-            for (String item : array) {
-                if (TextUtils.isEmpty(item)) {
-                    continue;
-                }
-                tiles.add(item);
-            }
-            filterTiles(context, tiles);
-        }
-        return tiles;
+        filterTiles(context);
+        return QSConstants.TILES_DEFAULT;
     }
 
     public static String getDefaultTilesAsString(Context context) {
@@ -68,51 +53,45 @@ public class QSUtils {
         return TextUtils.join(",", list);
     }
 
-    private static void filterTiles(Context context, List<String> tiles) {
-        boolean deviceSupportsMobile = deviceSupportsMobileData(context);
-
-        // Tiles that need conditional filtering
-        Iterator<String> iterator = tiles.iterator();
-        while (iterator.hasNext()) {
-            String tileKey = iterator.next();
-            boolean removeTile = false;
-            switch (tileKey) {
-                case QSConstants.TILE_CELLULAR:
-                case QSConstants.TILE_HOTSPOT:
-                case QSConstants.TILE_DATA:
-                case QSConstants.TILE_ROAMING:
-                case QSConstants.TILE_APN:
-                    removeTile = !deviceSupportsMobile;
-                    break;
-                case QSConstants.TILE_DDS:
-                    removeTile = !deviceSupportsDdsSupported(context);
-                    break;
-                case QSConstants.TILE_FLASHLIGHT:
-                    removeTile = !deviceSupportsFlashLight(context);
-                    break;
-                case QSConstants.TILE_BLUETOOTH:
-                    removeTile = !deviceSupportsBluetooth();
-                    break;
-                case QSConstants.TILE_NFC:
-                    removeTile = !deviceSupportsNfc(context);
-                    break;
-                case QSConstants.TILE_COMPASS:
-                    removeTile = !deviceSupportsCompass(context);
-                    break;
-                case QSConstants.TILE_AMBIENT_DISPLAY:
-                    removeTile = !deviceSupportsDoze(context);
-                    break;
-            }
-            if (removeTile) {
-                iterator.remove();
-                tiles.remove(tileKey);
-            }
-        }
-    }
-
     private static void filterTiles(Context context) {
         if (!sAvailableTilesFiltered) {
-            filterTiles(context, QSConstants.TILES_DEFAULT);
+            boolean deviceSupportsMobile = deviceSupportsMobileData(context);
+
+            // Tiles that need conditional filtering
+            Iterator<String> iterator = QSConstants.TILES_AVAILABLE.iterator();
+            while (iterator.hasNext()) {
+                String tileKey = iterator.next();
+                boolean removeTile = false;
+                switch (tileKey) {
+                    case QSConstants.TILE_CELLULAR:
+                    case QSConstants.TILE_HOTSPOT:
+                    case QSConstants.TILE_DATA:
+                    case QSConstants.TILE_ROAMING:
+                    case QSConstants.TILE_APN:
+                        removeTile = !deviceSupportsMobile;
+                        break;
+                    case QSConstants.TILE_DDS:
+                        removeTile = !deviceSupportsDdsSupported(context);
+                        break;
+                    case QSConstants.TILE_FLASHLIGHT:
+                        removeTile = !deviceSupportsFlashLight(context);
+                        break;
+                    case QSConstants.TILE_BLUETOOTH:
+                        removeTile = !deviceSupportsBluetooth();
+                        break;
+                    case QSConstants.TILE_NFC:
+                        removeTile = !deviceSupportsNfc(context);
+                        break;
+                    case QSConstants.TILE_COMPASS:
+                        removeTile = !deviceSupportsCompass(context);
+                        break;
+                }
+                if (removeTile) {
+                    iterator.remove();
+                    QSConstants.TILES_DEFAULT.remove(tileKey);
+                }
+            }
+
             sAvailableTilesFiltered = true;
         }
     }

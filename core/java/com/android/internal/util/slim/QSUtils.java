@@ -85,6 +85,9 @@ public class QSUtils {
                     case QSConstants.TILE_COMPASS:
                         removeTile = !deviceSupportsCompass(context);
                         break;
+                    case QSConstants.TILE_AMBIENT_DISPLAY:
+                        removeTile = !deviceSupportsDoze(context);
+                        break;
                 }
                 if (removeTile) {
                     iterator.remove();

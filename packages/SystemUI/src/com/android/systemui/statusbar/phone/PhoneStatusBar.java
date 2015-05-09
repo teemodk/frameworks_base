@@ -508,7 +508,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             updateBatteryLevelText();
             mBatteryLevel.setVisibility(mShowBatteryText ? View.VISIBLE : View.GONE);
         }
-            
+
     }
 
     private void loadShowBatteryTextSetting() {

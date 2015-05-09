@@ -64,7 +64,8 @@ public class LockscreenToggleTile extends QSTile<QSTile.BooleanState>
 
         mKeyguard = host.getKeyguardMonitor();
         mKeyguardViewMediator =
-                ((SystemUIApplication) mContext.getApplicationContext()).getComponent(KeyguardViewMediator.class);
+                ((SystemUIApplication) mContext.getApplicationContext())
+                .getComponent(KeyguardViewMediator.class);
         mPersistedState = getPersistedState();
         mKeyguardBound = mKeyguardViewMediator.isKeyguardBound();
         applyLockscreenState();

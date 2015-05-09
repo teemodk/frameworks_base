@@ -130,7 +130,8 @@ public class QSDetailItemsList extends LinearLayout {
             summary.setVisibility(twoLines ? VISIBLE : GONE);
             summary.setText(twoLines ? item.line2 : null);
             view.setMinimumHeight(getContext().getResources().getDimensionPixelSize(
-                    twoLines ? R.dimen.qs_detail_item_height_twoline : R.dimen.qs_detail_item_height));
+                    twoLines ? R.dimen.qs_detail_item_height_twoline
+                    : R.dimen.qs_detail_item_height));
 
             final ImageView disconnect = (ImageView) view.findViewById(android.R.id.icon2);
             disconnect.setVisibility(item.canDisconnect ? VISIBLE : GONE);

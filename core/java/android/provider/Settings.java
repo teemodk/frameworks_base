@@ -3072,12 +3072,6 @@ public final class Settings {
                 "status_bar_show_battery_percent";
 
         /**
-         * Height of navigation bar buttons
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
-
-        /**
          * Show or hide clock
          * 0 - hide
          * 1 - show (default)

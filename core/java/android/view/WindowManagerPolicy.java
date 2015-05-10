@@ -19,7 +19,6 @@ package android.view;
 import android.annotation.IntDef;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.content.Intent;
 import android.content.res.CompatibilityInfo;
 import android.content.res.Configuration;
 import android.graphics.Rect;
@@ -1036,12 +1035,6 @@ public interface WindowManagerPolicy {
      * @return true if in keyguard is secure.
      */
     public boolean isKeyguardSecure();
-
-    /**
-     * Ask keyguard to invoke a custom intent after dismissing keyguard
-     * @hide
-     */
-    public void showCustomIntentOnKeyguard(Intent intent);
 
     /**
      * inKeyguardRestrictedKeyInputMode

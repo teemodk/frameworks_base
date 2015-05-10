@@ -300,12 +300,6 @@ public class KeyguardServiceDelegate {
         }
     }
 
-    public void showCustomIntent(Intent intent) {
-        if (mKeyguardService != null) {
-            mKeyguardService.showCustomIntent(intent);
-        }
-    }
-
     private static final View createScrim(Context context) {
         View view = new View(context);
 

@@ -70,9 +70,6 @@ public class KeyguardService extends Service {
              mKeyguardViewMediator.addStateMonitorCallback(callback);
          }
 
-        public void showCustomIntent(Intent intent) {
-        }
-
         public boolean isShowing() {
             return mKeyguardViewMediator.isShowing();
         }

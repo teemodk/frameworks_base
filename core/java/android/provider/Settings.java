@@ -3236,13 +3236,6 @@ public final class Settings {
         public static final String QUICK_SETTINGS_TILES_VIBRATE = "quick_settings_vibrate";
 
         /**
-         * Defines the status and navigation bar color is battery safe mode is enabled.
-         *
-         * @hide
-         */
-        public static final String BATTERY_SAVER_MODE_COLOR = "battery_save_mode_color";
-
-        /**
          * Boolean value whether to link ringtone and notification volume
          *
          * @hide

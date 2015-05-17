@@ -3462,13 +3462,6 @@ public final class Settings {
         public static final String RECENTS_SHOW_HIDE_SEARCH_BAR = "recents_show_hide_search_bar";
 
         /**
-         * Defines the status and navigation bar color is battery safe mode is enabled.
-         *
-         * @hide
-         */
-        public static final String BATTERY_SAVER_MODE_COLOR = "battery_save_mode_color";
-
-        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *

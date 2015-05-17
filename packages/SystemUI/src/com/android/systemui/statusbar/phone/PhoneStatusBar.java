@@ -405,7 +405,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     int mInitialTouchX;
     int mInitialTouchY;
 
-    private int mBatterySaverWarningColor;
     // for disabling the status bar
     int mDisabled = 0;
     boolean mDisableHomeLongpress;
@@ -446,9 +445,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SCREEN_BRIGHTNESS_MODE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.BATTERY_SAVER_MODE_COLOR),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT),
@@ -499,20 +495,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.SU_INDICATOR))) {
                 mSuController.updateNotification();
                 mSuController.fireCallbacks();
-            } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.BATTERY_SAVER_MODE_COLOR))) {
-                mBatterySaverWarningColor = Settings.System.getIntForUser(
-                        mContext.getContentResolver(),
-                        Settings.System.BATTERY_SAVER_MODE_COLOR, -2,
-                        UserHandle.USER_CURRENT);
-                if (mBatterySaverWarningColor == -2) {
-                    mBatterySaverWarningColor = mContext.getResources()
-                            .getColor(com.android.internal.R.color.battery_saver_mode_color);
-                }
-                mHandler.post(mCheckBarModes);
-                if (mDozeServiceHost != null) {
-                    mDozeServiceHost.firePowerSaveChanged(mBatteryController.isPowerSave());
-                }
             }
             super.onChange(selfChange, uri);
 
@@ -1040,15 +1022,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
 
         mEdgeBorder = res.getDimensionPixelSize(R.dimen.status_bar_edge_ignore);
-
-        mBatterySaverWarningColor = Settings.System.getIntForUser(
-                mContext.getContentResolver(),
-                Settings.System.BATTERY_SAVER_MODE_COLOR, -2,
-                UserHandle.USER_CURRENT);
-        if (mBatterySaverWarningColor == -2) {
-            mBatterySaverWarningColor = mContext.getResources()
-                   .getColor(com.android.internal.R.color.battery_saver_mode_color);
-        }
 
         // set the inital view visibility
         setAreThereNotifications();
@@ -3140,10 +3113,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         final boolean powerSave = mBatteryController.isPowerSave();
         final boolean anim = (mScreenOn == null || mScreenOn) && windowState != WINDOW_STATE_HIDDEN
                 && !powerSave;
-        if (powerSave) {
+        if (powerSave && getBarState() == StatusBarState.SHADE) {
             mode = MODE_WARNING;
         }
-        transitions.setWarningColor(mBatterySaverWarningColor);
         transitions.transitionTo(mode, anim);
     }
 

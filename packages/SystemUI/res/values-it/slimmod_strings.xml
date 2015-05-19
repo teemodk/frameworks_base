@@ -37,4 +37,14 @@
     <string name="notification_inspect_heads_up_title_enabled">Attiva heads up per questa app</string>
     <string name="notification_inspect_heads_up_title_disabled">Disattiva heads up per questa app</string>
 
+    <!-- Battery status in pie controls -->
+    <string name="pie_battery_status_charging">Ricarica (<xliff:g id="percent">%d</xliff:g>%%)</string>
+    <string name="pie_battery_status_full">Carico</string>
+    <string name="pie_battery_status_discharging"><xliff:g id="percent">%d</xliff:g>%% rimanente</string>
+
+    <!-- Phone status in pie controls -->
+    <string name="pie_phone_status_no_service">Nessun servizio</string>
+    <string name="pie_phone_status_airplane_mode">Modalità aereo</string>
+    <string name="pie_phone_status_emergency_only">Solo chiamate emergenza</string>
+
 </resources>

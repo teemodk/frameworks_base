@@ -19,11 +19,17 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- Flashlight notification -->
     <string name="notification_flashlight_on_title">Torcia attiva</string>
     <string name="notification_flashlight_on_summary">Tappa per spegnere</string>
 
-    <!-- Heads up -->
     <string name="permlab_changeHeadsUpState">attiva o disattiva heads up</string>
     <string name="permdesc_changeHeadsUpState">Permetti alle altre app di mostrare le notifiche come heads up.</string>
+
+    <string name="global_actions_pie_mode_on_status">SlimPie attiva</string>
+    <string name="global_actions_pie_mode_off_status">SlimPie disattivata</string>
+    <string name="disable_pie_navigation_error">Non puoi disattivare i controlli Pie. Non ci sono altri strumenti di navigazione attivi. Attiva la barra di navigazione per disattivare la Pie.</string>
+    <string name="global_actions_nav_bar_mode_on_status">Barra di navigazione attiva</string>
+    <string name="global_actions_nav_bar_mode_off_status">Barra di navigazione disattivata</string>
+    <string name="disable_navigation_pie_error">Non puoi disattivare la barra di navigazione. Non ci sono altri strumenti di navigazione attivi. Attiva la Pie per disattivare la barra di navigazione.</string>
+
 </resources>

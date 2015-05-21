@@ -41,4 +41,6 @@
     <string name="pie_phone_status_airplane_mode">Modalità aereo</string>
     <string name="pie_phone_status_emergency_only">Solo chiamate emergenza</string>
 
+    <string name="quick_settings_expanded_desktop">Espanso</string>
+    <string name="quick_settings_expanded_desktop_off">Normale</string>
 </resources>

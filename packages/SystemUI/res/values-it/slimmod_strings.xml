@@ -43,4 +43,7 @@
 
     <string name="quick_settings_expanded_desktop">Espanso</string>
     <string name="quick_settings_expanded_desktop_off">Normale</string>
+
+    <!-- Smart PullDown Warning -->
+    <string name="smart_pulldown_disabled">Il pulldown intelligente è disattivato</string>
 </resources>

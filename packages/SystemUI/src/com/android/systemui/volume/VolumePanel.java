@@ -517,13 +517,12 @@ public class VolumePanel extends Handler implements DemoMode {
                     resetTimeout();
                 }
             });
-        mExpandPanel.setRotation(mExtendedPanelExpanded ? 180 : 0);
-        }
-        else {
-        mExtendedPanelExpanded = true;
-        createSliders();
-        expandVolumePanel();
-        updateZenPanelVisible();
+            mExpandPanel.setRotation(mExtendedPanelExpanded ? 180 : 0);
+        } else {
+            mExtendedPanelExpanded = true;
+            createSliders();
+            expandVolumePanel();
+            updateZenPanelVisible();
         }
 
         mSliderPanelExpand.setGravity(Gravity.TOP);

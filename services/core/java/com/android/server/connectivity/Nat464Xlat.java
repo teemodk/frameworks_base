@@ -128,6 +128,7 @@ public class Nat464Xlat extends BaseNetworkObserver {
         }
 
         try {
+            mNMService.unregisterObserver(this);
             mNMService.registerObserver(this);
         } catch(RemoteException e) {
             Slog.e(TAG, "startClat: Can't register interface observer for clat on " + mNetwork);
@@ -236,16 +237,12 @@ public class Nat464Xlat extends BaseNetworkObserver {
     }
 
     @Override
-    public void interfaceLinkStateChanged(String iface, boolean up) {
+    public void addressUpdated(String iface, LinkAddress clatAddress) {
         // Called by the InterfaceObserver on its own thread, so can race with stop().
-        if (isStarted() && up && mIface.equals(iface)) {
+        if (isStarted() && mIface.equals(iface) && clatAddress != null) {
             Slog.i(TAG, "interface " + iface + " is up, mIsRunning " + mIsRunning + "->true");
 
             if (!mIsRunning) {
-                LinkAddress clatAddress = getLinkAddress(iface);
-                if (clatAddress == null) {
-                    return;
-                }
                 mIsRunning = true;
                 maybeSetIpv6NdOffload(mBaseIface, false);
                 LinkProperties lp = new LinkProperties(mNetwork.linkProperties);

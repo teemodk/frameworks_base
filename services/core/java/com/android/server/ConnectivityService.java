@@ -178,9 +178,6 @@ public class ConnectivityService extends IConnectivityManager.Stub
     private static final String ACTION_PKT_CNT_SAMPLE_INTERVAL_ELAPSED =
             "android.net.ConnectivityService.action.PKT_CNT_SAMPLE_INTERVAL_ELAPSED";
 
-    private static final String NETID_UPDATE =
-        "org.codeaurora.NETID_UPDATE";
-
     private static final String EXTRA_NETWORK_TYPE = "netType";
 
     private static final String EXTRA_NETID = "netID";
@@ -2267,6 +2264,8 @@ public class ConnectivityService extends IConnectivityManager.Stub
                         ReapUnvalidatedNetworks.DONT_REAP);
             }
         }
+        NetworkFactoryInfo nfi = mNetworkFactoryInfos.remove(msg.replyTo);
+        if (DBG && nfi != null) log("unregisterNetworkFactory for " + nfi.name);
     }
 
     // If this method proves to be too slow then we can maintain a separate
@@ -4352,7 +4351,7 @@ public class ConnectivityService extends IConnectivityManager.Stub
         }
         if (reapUnvalidatedNetworks == ReapUnvalidatedNetworks.REAP) {
             for (NetworkAgentInfo nai : mNetworkAgentInfos.values()) {
-                if (!nai.everValidated && unneeded(nai)) {
+                if (!nai.everValidated && unneeded(nai) && nai != newNetwork) {
                     if (DBG) log("Reaping " + nai.name());
                     teardownUnneededNetwork(nai);
                 }
@@ -4418,18 +4417,6 @@ public class ConnectivityService extends IConnectivityManager.Stub
         }
     }
 
-    private void sendNetworkInfoUpdateBroadcast(int type, int netid) {
-        Intent intent = new Intent(NETID_UPDATE);
-        intent.putExtra(EXTRA_NETWORK_TYPE, type);
-        intent.putExtra(EXTRA_NETID, netid);
-        log("sendNetworkInfoUpdateBroadcast type = " + type + " netid = " + netid);
-        try {
-            mContext.sendBroadcast(intent);
-        } catch (SecurityException se) {
-            loge("sendPrefChangedBroadcast() SecurityException: " + se);
-        }
-    }
-
     private void updateNetworkInfo(NetworkAgentInfo networkAgent, NetworkInfo newInfo) {
         NetworkInfo.State state = newInfo.getState();
         NetworkInfo oldInfo = null;
@@ -4485,17 +4472,6 @@ public class ConnectivityService extends IConnectivityManager.Stub
             // Consider network even though it is not yet validated.
             rematchNetworkAndRequests(networkAgent, NascentState.NOT_JUST_VALIDATED,
                     ReapUnvalidatedNetworks.REAP);
-            int val = SystemProperties.getInt("persist.cne.feature", 0);
-            boolean isPropFeatureEnabled = (val == 3) ? true : false;
-            if (isPropFeatureEnabled) {
-               if ((newInfo.getType() == ConnectivityManager.TYPE_WIFI) ||
-                    (newInfo.getType() == ConnectivityManager.TYPE_MOBILE)) {
-                  if (DBG) {
-                    log("sending network info update for type = " + newInfo.getType());
-                  }
-                  sendNetworkInfoUpdateBroadcast(newInfo.getType(), networkAgent.network.netId);
-               }
-            }
         } else if (state == NetworkInfo.State.DISCONNECTED ||
                 state == NetworkInfo.State.SUSPENDED) {
             networkAgent.asyncChannel.disconnect();

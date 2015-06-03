@@ -102,7 +102,6 @@ import com.android.internal.util.slim.DeviceUtils;
 import com.android.systemui.R;
 import com.android.systemui.RecentsComponent;
 import com.android.systemui.SearchPanelView;
-import com.android.systemui.slimrecent.RecentController;
 import com.android.systemui.statusbar.phone.NavigationBarOverlay;
 import com.android.systemui.statusbar.policy.PieController;
 import com.android.systemui.SwipeHelper;
@@ -275,7 +274,7 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     private boolean mDeviceProvisioned = false;
 
-    private RecentController mRecents;
+    private RecentsComponent mRecents;
 
     protected int mZenMode;
 
@@ -590,6 +589,9 @@ public abstract class BaseStatusBar extends SystemUI implements
         mBarService = IStatusBarService.Stub.asInterface(
                 ServiceManager.getService(Context.STATUS_BAR_SERVICE));
 
+        mRecents = getComponent(RecentsComponent.class);
+        mRecents.setCallback(this);
+
         final Configuration currentConfig = mContext.getResources().getConfiguration();
         mLocale = currentConfig.locale;
         mLayoutDirection = TextUtils.getLayoutDirectionFromLocale(mLocale);
@@ -601,8 +603,6 @@ public abstract class BaseStatusBar extends SystemUI implements
                 android.R.interpolator.linear_out_slow_in);
         mFastOutLinearIn = AnimationUtils.loadInterpolator(mContext,
                 android.R.interpolator.fast_out_linear_in);
-
-        mRecents = new RecentController(mContext, mLayoutDirection);
 
         // Connect in to the status bar manager service
         StatusBarIconList iconList = new StatusBarIconList();
@@ -1289,13 +1289,13 @@ public abstract class BaseStatusBar extends SystemUI implements
     protected void showRecents(boolean triggeredFromAltTab) {
         if (mRecents != null) {
             sendCloseSystemWindows(mContext, SYSTEM_DIALOG_REASON_RECENT_APPS);
-            //mRecents.showRecents();
+            mRecents.showRecents(triggeredFromAltTab, getStatusBarView());
         }
     }
 
     protected void hideRecents(boolean triggeredFromAltTab, boolean triggeredFromHomeKey) {
         if (mRecents != null) {
-            //mRecents.hideRecents(triggeredFromHomeKey);
+            mRecents.hideRecents(triggeredFromAltTab, triggeredFromHomeKey);
         }
     }
 
@@ -1308,37 +1308,31 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     protected void preloadRecents() {
         if (mRecents != null) {
-            mRecents.preloadRecentTasksList();
+            mRecents.preloadRecents();
         }
     }
 
     protected void cancelPreloadingRecents() {
         if (mRecents != null) {
-            mRecents.cancelPreloadingRecentTasksList();
+            mRecents.cancelPreloadingRecents();
         }
     }
 
     protected void showRecentsNextAffiliatedTask() {
         if (mRecents != null) {
-           // mRecents.showNextAffiliatedTask();
+            mRecents.showNextAffiliatedTask();
         }
     }
 
     protected void showRecentsPreviousAffiliatedTask() {
         if (mRecents != null) {
-           // mRecents.showPrevAffiliatedTask();
+            mRecents.showPrevAffiliatedTask();
         }
     }
 
     @Override
     public void onVisibilityChanged(boolean visible) {
         // Do nothing
-    }
-
-    protected void rebuildRecentsScreen() {
-        if (mRecents != null) {
-            mRecents.rebuildRecentsScreen();
-        }
     }
 
     public abstract void resetHeadsUpDecayTimer();

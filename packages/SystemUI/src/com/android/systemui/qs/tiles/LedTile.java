@@ -53,7 +53,7 @@ public class LedTile extends QSTile<QSTile.BooleanState> {
         mHost.startSettingsActivity(intent);
     }
 
- protected void toggleState() {
+    protected void toggleState() {
          Settings.System.putInt(mContext.getContentResolver(),
                         Settings.System.NOTIFICATION_LIGHT_PULSE, !ledEnabled() ? 1 : 0);
     }

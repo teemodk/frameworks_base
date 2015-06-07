@@ -20,8 +20,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.view.IWindowManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManagerGlobal;
+import android.view.WindowManagerPolicyControl;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -58,6 +63,19 @@ public class RebootTile extends QSTile<QSTile.BooleanState> {
     @Override
     protected void handleClick() {
         showDetail(true);
+    }
+
+    @Override
+    public void handleLongClick() {
+            final IWindowManager windowManagerService = IWindowManager.Stub.asInterface(
+                    ServiceManager.getService(Context.WINDOW_SERVICE));
+           if (windowManagerService == null) {
+               return; // ouch
+           }
+           try {
+               windowManagerService.toggleGlobalMenu();
+           } catch (RemoteException e) {
+           }
     }
 
     @Override

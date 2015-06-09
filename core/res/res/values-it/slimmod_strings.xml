@@ -32,4 +32,6 @@
     <string name="global_actions_nav_bar_mode_off_status">Barra di navigazione disattivata</string>
     <string name="disable_navigation_pie_error">Non puoi disattivare la barra di navigazione. Non ci sono altri strumenti di navigazione attivi. Attiva la Pie per disattivare la barra di navigazione.</string>
 
+    <string name="global_action_screen_record">Registra schermo</string>
+
 </resources>

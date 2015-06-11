@@ -60,7 +60,7 @@
                     android:id="@+id/ime_left"
                     android:layout_width="@dimen/navigation_extra_key_width"
                     android:layout_height="match_parent"
-                    android:scaleType="center"
+                    android:scaleType="centerInside"
                     android:src="@drawable/ic_sysbar_ime_left"
                     android:visibility="gone"
                     android:layout_gravity="start"
@@ -113,7 +113,7 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_sysbar_ime_right"
                     android:visibility="gone"
-                    android:scaleType="center"
+                    android:scaleType="centerInside"
                     android:layout_gravity="end"
                     systemui:keyCode="22" />
                 <com.android.systemui.statusbar.policy.KeyButtonView

@@ -34,4 +34,18 @@
 
     <string name="global_action_screen_record">Registra schermo</string>
 
+    <!-- LiveDisplay strings -->
+    <string name="live_display_title" translatable="false">LiveDisplay</string>
+    <string name="live_display_auto">Automatico</string>
+    <string name="live_display_auto_summary">Imposta automaticamente la temperatura colore in base all\'ora del giorno (richiede localizzazione attiva)</string>
+    <string name="live_display_off">Off</string>
+    <string name="live_display_off_summary">Impostazione automatica temperatura colore disattivata</string>
+    <string name="live_display_day">Giorno</string>
+    <string name="live_display_day_summary">Usa solo impostazioni Giorno</string>
+    <string name="live_display_night">Notte</string>
+    <string name="live_display_night_summary">Usa solo impostazioni Notte</string>
+    <string name="live_display_outdoor">All\'aperto</string>
+    <string name="live_display_outdoor_summary">Usa solo impostazioni All\'aperto (luce solare)</string>
+    <string name="live_display_hint">LiveDisplay può aiutare a ridurre lo sforzo visivo.</string>
+
 </resources>

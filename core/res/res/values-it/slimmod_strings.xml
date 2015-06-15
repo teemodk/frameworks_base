@@ -35,7 +35,6 @@
     <string name="global_action_screen_record">Registra schermo</string>
 
     <!-- LiveDisplay strings -->
-    <string name="live_display_title" translatable="false">LiveDisplay</string>
     <string name="live_display_auto">Automatico</string>
     <string name="live_display_auto_summary">Imposta automaticamente la temperatura colore in base all\'ora del giorno (richiede localizzazione attiva)</string>
     <string name="live_display_off">Off</string>

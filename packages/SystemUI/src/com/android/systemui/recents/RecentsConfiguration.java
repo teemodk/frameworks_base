@@ -79,7 +79,7 @@ public class RecentsConfiguration {
     /** Search bar */
     int searchBarAppWidgetId = -1;
     public boolean searchBarVisible;
-    public static int searchBarSpaceHeightPx;
+    public int searchBarSpaceHeightPx;
 
     /** Task stack */
     public int taskStackScrollDuration;
@@ -312,7 +312,7 @@ public class RecentsConfiguration {
                 Settings.System.LOCK_TO_APP_ENABLED) != 0;
 
         searchBarVisible = ssp.getSystemSetting(context,
-                Settings.System.RECENTS_SHOW_HIDE_SEARCH_BAR) == 1;
+                Settings.System.RECENTS_SHOW_SEARCH_BAR) == 1;
         if (searchBarVisible)
             searchBarSpaceHeightPx = context.getResources()
                     .getDimensionPixelSize(R.dimen.recents_search_bar_space_height);

@@ -21,9 +21,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CameraManager;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -72,9 +69,6 @@ public class QSUtils {
                     case QSConstants.TILE_DDS:
                         removeTile = !deviceSupportsDdsSupported(context);
                         break;
-                    case QSConstants.TILE_FLASHLIGHT:
-                        removeTile = !deviceSupportsFlashLight(context);
-                        break;
                     case QSConstants.TILE_BLUETOOTH:
                         removeTile = !deviceSupportsBluetooth();
                         break;
@@ -120,28 +114,6 @@ public class QSUtils {
 
     public static boolean deviceSupportsBluetooth() {
         return BluetoothAdapter.getDefaultAdapter() != null;
-    }
-
-    public static boolean deviceSupportsFlashLight(Context context) {
-        CameraManager cameraManager = (CameraManager) context.getSystemService(
-                Context.CAMERA_SERVICE);
-        try {
-            String[] ids = cameraManager.getCameraIdList();
-            for (String id : ids) {
-                CameraCharacteristics c = cameraManager.getCameraCharacteristics(id);
-                Boolean flashAvailable = c.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
-                Integer lensFacing = c.get(CameraCharacteristics.LENS_FACING);
-                if (flashAvailable != null
-                        && flashAvailable
-                        && lensFacing != null
-                        && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
-                    return true;
-                }
-            }
-        } catch (CameraAccessException e) {
-            // Ignore
-        }
-        return false;
     }
 
     public static boolean deviceSupportsCompass(Context context) {

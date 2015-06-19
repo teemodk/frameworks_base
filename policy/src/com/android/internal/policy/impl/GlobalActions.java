@@ -254,7 +254,9 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
             } else if ((actionKey.equals(PolicyConstants.ACTION_SOUND)) && (mShowSilentToggle)) {
                 mItems.add(mSilentModeAction);
             } else if (actionKey.equals(PolicyConstants.ACTION_USERS)) {
-                if (SystemProperties.getBoolean("fw.power_user_switcher", false)) {
+                List<UserInfo> users = ((UserManager) mContext.getSystemService(
+                        Context.USER_SERVICE)).getUsers();
+                if (users.size() > 1) {
                     addUsersToMenu(mItems);
                 }
             } else if (actionKey.equals(PolicyConstants.ACTION_LOCKDOWN)) {
@@ -483,7 +485,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                     Drawable icon = user.iconPath != null ? Drawable.createFromPath(user.iconPath)
                             : null;
                     SinglePressAction switchToUser = new SinglePressAction(
-                            com.android.internal.R.drawable.ic_menu_cc, icon,
+                            com.android.internal.R.drawable.ic_lock_user, icon,
                             (user.name != null ? user.name : "Primary")
                             + (isCurrentUser ? " \u2714" : "")) {
                         public void onPress() {

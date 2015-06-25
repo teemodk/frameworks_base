@@ -35,8 +35,8 @@
         android:id="@+id/notification_lights_out"
         android:layout_width="@dimen/status_bar_icon_size"
         android:layout_height="match_parent"
-        android:paddingStart="6dip"
-        android:paddingBottom="2dip"
+        android:paddingStart="6dp"
+        android:paddingBottom="8dp"
         android:src="@drawable/ic_sysbar_lights_out_dot_small"
         android:scaleType="center"
         android:visibility="gone"
@@ -85,6 +85,13 @@
             android:orientation="horizontal"
             >
 
+            <com.android.systemui.statusbar.policy.NetworkTraffic
+                android:id="@+id/networkTraffic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:singleLine="false"
+                android:gravity="right|center_vertical"/>
+
             <include layout="@layout/msim_system_icons" />
 
             <TextView android:id="@+id/battery_level_text"
@@ -102,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:singleLine="true"
-                android:paddingStart="6dip"
+                android:paddingStart="7dp"
                 android:gravity="center_vertical|start"
                 />
         </com.android.keyguard.AlphaOptimizedLinearLayout>

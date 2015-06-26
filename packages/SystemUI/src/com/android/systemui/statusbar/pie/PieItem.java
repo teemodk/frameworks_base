@@ -32,7 +32,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 
 import com.android.internal.util.gesture.EdgeGesturePosition;
 import com.android.internal.util.slim.ImageHelper;
@@ -210,8 +209,7 @@ public class PieItem extends PieView.PieDrawable {
     public void setImageDrawable(Drawable drawable) {
         if (mView instanceof ImageView) {
             ImageView imageView = (ImageView) mView;
-            imageView.setImageBitmap(ImageHelper.drawableToBitmap(drawable));
-            imageView.setScaleType(ImageView.ScaleType.CENTER);
+            imageView.setImageDrawable(drawable);
         }
     }
 
@@ -242,8 +240,7 @@ public class PieItem extends PieView.PieDrawable {
             if (colorize && drawableColorMode != 3) {
                 drawable = ImageHelper.getColoredDrawable(drawable, drawableColor);
             }
-            imageView.setImageBitmap(ImageHelper.drawableToBitmap(drawable));
-            imageView.setScaleType(ImageView.ScaleType.CENTER);
+            imageView.setImageDrawable(drawable);
         }
     }
 

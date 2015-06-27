@@ -47,9 +47,7 @@ public class ColorHelper {
     }
 
     public static Bitmap drawableToBitmap (Drawable drawable) {
-        if (drawable == null) {
-            return drawable;
-        } else if (drawable instanceof BitmapDrawable) {
+        if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
         }
         Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),

@@ -759,6 +759,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     dispatchMediaKeyWithWakeLockToAudioService(
                             KeyEvent.changeAction(event, KeyEvent.ACTION_UP));
                     break;
+                }
             }
         }
     }
@@ -5750,7 +5751,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     boolean mayChangeVolume = false;
 
                     if (isMusicActive()) {
-                        if (mVolBtnMusicControls) {
+                        if (mVolumeMusicControls) {
                             // Detect long key presses.
                             if (down) {
                                 mIsLongPress = false;

@@ -140,12 +140,6 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
     private FrameLayout mRot0;
     private FrameLayout mRot90;
 
-    private boolean mDimNavButtons;
-    private int mDimNavButtonsTimeout;
-    private float mDimNavButtonsAlpha;
-    private float mOriginalAlpha = 1.0f;
-    private boolean mIsDim = false;
-
     private ArrayList<ActionConfig> mButtonsConfig;
     private List<Integer> mButtonIdList;
 
@@ -217,19 +211,6 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
                     .showInputMethodPicker();
         }
     };
-
-    public void onNavButtonTouched() {
-        mHandler.removeCallbacks(mNavButtonDimmer);
-        if (getNavButtons() != null) {
-            if (mIsDim) {
-                getNavButtons().setAlpha(mOriginalAlpha);
-                mIsDim = false;
-            }
-            if (mDimNavButtons) {
-                mHandler.postDelayed(mNavButtonDimmer, mDimNavButtonsTimeout);
-            }
-        }
-    }
 
     private class H extends Handler {
         public void handleMessage(Message m) {
@@ -381,10 +362,6 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
 
     public View getImeSwitchButton() {
         return mCurrentView.findViewById(R.id.ime_switcher);
-    }
-
-    public ViewGroup getNavButtons() {
-        return (ViewGroup) mCurrentView.findViewById(R.id.nav_buttons);
     }
 
     public View getLeftImeArrowButton() {
@@ -722,8 +699,9 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
             setSlippery(disableHome && disableRecent && disableBack);
         }
 
-        if (getNavButtons() != null) {
-            LayoutTransition lt = getNavButtons().getLayoutTransition();
+        ViewGroup navButtons = (ViewGroup) mCurrentView.findViewById(R.id.nav_buttons);
+        if (navButtons != null) {
+            LayoutTransition lt = navButtons.getLayoutTransition();
             if (lt != null) {
                 if (!lt.getTransitionListeners().contains(mTransitionListener)) {
                     lt.addTransitionListener(mTransitionListener);
@@ -893,8 +871,6 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
         updateTaskSwitchHelper();
 
         setNavigationIconHints(mNavigationIconHints, true);
-
-        onNavButtonTouched();
     }
 
     private void updateTaskSwitchHelper() {
@@ -1107,16 +1083,9 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
         }
 
         void observe() {
-            ContentResolver resolver = mContext.getContentResolver();
-
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_IME_ARROWS), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DIM_NAV_BUTTONS), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DIM_NAV_BUTTONS_TIMEOUT), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DIM_NAV_BUTTONS_ALPHA), false, this);
+            mContext.getContentResolver().registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.STATUS_BAR_IME_ARROWS),
+                    false, this);
 
             onChange(false);
         }
@@ -1127,28 +1096,11 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
 
         @Override
         public void onChange(boolean selfChange) {
-            super.onChange(selfChange);
-            update();
-            onNavButtonTouched();
-            setNavigationIconHints(mNavigationIconHints, true);
-        }
-
-        public void update() {
-            ContentResolver resolver = mContext.getContentResolver();
-
             mImeArrowVisibility =
-                    (Settings.System.getIntForUser(resolver,
-                    Settings.System.STATUS_BAR_IME_ARROWS, HIDE_IME_ARROW,
-                    UserHandle.USER_CURRENT) == SHOW_IME_ARROW);
-            mDimNavButtons = (Settings.System.getIntForUser(resolver,
-                    Settings.System.DIM_NAV_BUTTONS, 0,
-                    UserHandle.USER_CURRENT) == 1);
-            mDimNavButtonsTimeout = Settings.System.getIntForUser(resolver,
-                    Settings.System.DIM_NAV_BUTTONS_TIMEOUT, 3000,
-                    UserHandle.USER_CURRENT);
-            mDimNavButtonsAlpha = (float) Settings.System.getIntForUser(resolver,
-                    Settings.System.DIM_NAV_BUTTONS_ALPHA, 50,
-                    UserHandle.USER_CURRENT) / 100.0f;
+                    (Settings.System.getIntForUser(mContext.getContentResolver(),
+                            Settings.System.STATUS_BAR_IME_ARROWS, HIDE_IME_ARROW,
+                            UserHandle.USER_CURRENT) == SHOW_IME_ARROW);
+            setNavigationIconHints(mNavigationIconHints, true);
         }
     }
 
@@ -1232,15 +1184,4 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
     public interface OnVerticalChangedListener {
         void onVerticalChanged(boolean isVertical);
     }
-
-    private Runnable mNavButtonDimmer = new Runnable() {
-        @Override
-        public void run() {
-            if (getNavButtons() != null && mIsDim == false) {
-                mOriginalAlpha = getNavButtons().getAlpha();
-                mIsDim = true;
-                getNavButtons().setAlpha(mDimNavButtonsAlpha);
-            }
-        }
-    };
 }

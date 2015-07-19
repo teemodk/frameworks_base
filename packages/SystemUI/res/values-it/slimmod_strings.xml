@@ -55,16 +55,7 @@
     <string name="navigation_ring_title">Scorciatoie avvio rapido</string>
     <string name="navring_target_reset_message">Resettare tutti i collegamenti a default?</string>
     <string name="navring_target_reset">Reset collegamenti anello</string>
-    <string name="navring_action_open_ime_switcher">Apri commutatore IME</string>
-    <string name="navring_action_kill_app">Termina app</string>
     <string name="navring_action_none">Niente</string>
-    <string name="navring_action_take_screenshot">Screenshot</string>
-    <string name="navring_action_ring_vibrate">Suono/Vibrazione</string>
-    <string name="navring_action_ring_silent">Suono/Silenzioso</string>
-    <string name="navring_action_ring_vibrate_silent">Suono/Vibrazione/Silenzioso</string>
-    <string name="navring_action_screen_off">Spegni schermo</string>
-    <string name="navring_action_torch">Torcia</string>
-    <string name="navring_action_google_now">Google Now</string>
     <string name="navring_choose_action_title">Scegli azione</string>
     <string name="select_application">Seleziona app</string>
     <string name="lockscreen_target_empty">Vuoto</string>

@@ -356,8 +356,8 @@ public class MSimNetworkControllerImpl extends NetworkControllerImpl {
             cluster.setMobileDataIndicators(
                     true,
                     mAlwaysShowCdmaRssi ? mPhoneSignalIconId : mWimaxIconId,
-                    mMSimMobileActivityIconId[phoneId],
                     mInetCondition,
+                    mMSimMobileActivityIconId[phoneId],
                     mMSimDataTypeIconId[phoneId],
                     mMSimDataRoamIconId[phoneId],
                     mContentDescriptionWimax,
@@ -370,8 +370,8 @@ public class MSimNetworkControllerImpl extends NetworkControllerImpl {
                     mHasMobileDataFeature,
                     mShowPhoneRSSIForData ? mMSimPhoneSignalIconId[phoneId]
                         : mMSimDataSignalIconId[phoneId],
-                    mMSimMobileActivityIconId[phoneId],
                     mInetCondition,
+                    mMSimMobileActivityIconId[phoneId],
                     mMSimDataTypeIconId[phoneId],
                     mMSimDataRoamIconId[phoneId],
                     mMSimContentDescriptionPhoneSignal[phoneId],

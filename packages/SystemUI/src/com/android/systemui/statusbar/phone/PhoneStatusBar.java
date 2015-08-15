@@ -520,6 +520,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.ACCELEROMETER_ROTATION),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.LOCKSCREEN_HIDE_TILES_WITH_SENSITIVE_DATA),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -638,8 +641,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             loadShowBatteryTextSetting();
             updateBatteryLevelText();
             mBatteryLevel.setVisibility(mShowBatteryText ? View.VISIBLE : View.GONE);
-        }
 
+            mQSPanel.setHideQsTilesWithSensitiveData(
+                    Settings.Secure.getIntForUser(resolver,
+                        Settings.Secure.LOCKSCREEN_HIDE_TILES_WITH_SENSITIVE_DATA, 0,
+                            UserHandle.USER_CURRENT) != 0);
+        }
     }
 
     private boolean isPieEnabled() {
@@ -1252,6 +1259,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 }
             });
         }
+
+        mQSPanel.setHideQsTilesWithSensitiveData(
+                Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                    Settings.Secure.LOCKSCREEN_HIDE_TILES_WITH_SENSITIVE_DATA, 0,
+                        UserHandle.USER_CURRENT) != 0);
 
         // User info. Trigger first load.
         mHeader.setUserInfoController(mUserInfoController);

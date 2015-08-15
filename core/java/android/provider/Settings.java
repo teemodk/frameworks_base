@@ -6402,6 +6402,22 @@ public final class Settings {
         public static final String SEARCH_PANEL_ENABLED = "search_panel_enabled";
 
         /**
+         * Custom navring actions
+         * @hide
+         */
+        public static final String[] NAVIGATION_RING_TARGETS = new String[] {
+                "navigation_ring_targets_0",
+                "navigation_ring_targets_1",
+                "navigation_ring_targets_2",
+        };
+
+        /**
+         * Whether search panel is enabled.
+         * @hide
+         */
+        public static final String SEARCH_PANEL_ENABLED = "search_panel_enabled";
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear

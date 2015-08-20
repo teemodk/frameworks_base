@@ -582,7 +582,8 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         } else if (v == mAlarmStatus && mNextAlarm != null) {
             PendingIntent showIntent = mNextAlarm.getShowIntent();
             if (showIntent != null && showIntent.isActivity()) {
-                mActivityStarter.startActivity(showIntent.getIntent(), true /* dismissShade */);
+                mActivityStarter.startActivity(showIntent.getIntent(), true /* dismissShade */,
+                        true /* dismissKeyguard */);
             }
         } else if (v == mClock) {
             startClockActivity();
@@ -593,17 +594,17 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
 
     private void startSettingsActivity() {
         mActivityStarter.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS),
-                true /* dismissShade */);
+                true /* dismissShade */, true /* dismissKeyguard */);
     }
 
     private void startBatteryActivity() {
         mActivityStarter.startActivity(new Intent(Intent.ACTION_POWER_USAGE_SUMMARY),
-                true /* dismissShade */);
+                true /* dismissShade */, true /* dismissKeyguard */);
     }
 
     private void startClockActivity() {
         mActivityStarter.startActivity(new Intent(AlarmClock.ACTION_SHOW_ALARMS),
-                true /* dismissShade */);
+                true /* dismissShade */, true /* dismissKeyguard */);
     }
 
     private void startDateActivity() {
@@ -611,7 +612,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         builder.appendPath("time");
         ContentUris.appendId(builder, System.currentTimeMillis());
         Intent intent = new Intent(Intent.ACTION_VIEW).setData(builder.build());
-        mActivityStarter.startActivity(intent, true /* dismissShade */);
+        mActivityStarter.startActivity(intent, true /* dismissShade */, true /* dismissKeyguard */);
     }
 
     public void setQSPanel(QSPanel qsp) {

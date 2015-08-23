@@ -41,6 +41,7 @@ public class MultiUserSwitch extends FrameLayout implements View.OnClickListener
     private KeyguardUserSwitcher mKeyguardUserSwitcher;
     private boolean mKeyguardMode;
     final UserManager mUserManager;
+    private ActivityStarter mActivityStarter;
 
     public MultiUserSwitch(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -63,6 +64,10 @@ public class MultiUserSwitch extends FrameLayout implements View.OnClickListener
 
     public void setKeyguardMode(boolean keyguardShowing) {
         mKeyguardMode = keyguardShowing;
+    }
+
+    public void setActivityStarter(ActivityStarter activityStarter) {
+        mActivityStarter = activityStarter;
     }
 
     @Override

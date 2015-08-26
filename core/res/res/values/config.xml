@@ -2288,9 +2288,6 @@
     <integer name="config_nightColorTemperature">4500</integer>
     <integer name="config_outdoorAmbientLux">9000</integer>
 
-    <!-- Whether to boost cpu on wake to prevent jank -->
-    <bool name="config_cpuBoostOnWake">false</bool>
-
     <!-- Support in Surfaceflinger for blur layers.
          NOTE: This requires additional hardware-specific code. -->
     <bool name="config_ui_blur_enabled">false</bool>

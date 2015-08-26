@@ -423,6 +423,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     int mLongPressOnPowerBehavior;
     int mDoublePressOnPowerBehavior;
     int mTriplePressOnPowerBehavior;
+    boolean mCpuBoostOnWake;
     boolean mAwake;
     boolean mScreenOnEarly;
     boolean mScreenOnFully;
@@ -1557,6 +1558,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
         mAccessibilityManager = (AccessibilityManager) context.getSystemService(
                 Context.ACCESSIBILITY_SERVICE);
+
+        mCpuBoostOnWake = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_cpuBoostOnWake);
 
         // register for dock events
         IntentFilter filter = new IntentFilter();
@@ -6389,6 +6393,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
 
         if (enableScreen) {
+            if (mCpuBoostOnWake) {
+                mPowerManager.cpuBoost(4000000);
+            }
             try {
                 mWindowManager.enableScreenIfNeeded();
             } catch (RemoteException unhandled) {

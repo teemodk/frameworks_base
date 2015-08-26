@@ -186,4 +186,8 @@
   <java-symbol type="integer" name="config_nightColorTemperature" />
   <java-symbol type="integer" name="config_outdoorAmbientLux" />
 
+  <!-- CPU Boost on Wake -->
+  <java-symbol type="bool" name="config_cpuBoostOnWake" />
+
 </resources>
+

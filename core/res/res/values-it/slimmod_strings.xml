@@ -47,4 +47,10 @@
     <string name="live_display_outdoor_summary">Usa solo impostazioni All\'aperto (luce solare)</string>
     <string name="live_display_hint">LiveDisplay può aiutare a ridurre lo sforzo visivo.</string>
 
+    <!-- Floating Window -->
+    <string name="floating_window_snap_top">Fissa in alto</string>
+    <string name="floating_window_snap_bottom">Fissa in basso</string>
+    <string name="floating_window_snap_left">Fissa a sinistra</string>
+    <string name="floating_window_snap_right">Fissa a destra</string>
+    <string name="floating_window_minimize">Minimizza</string>
 </resources>

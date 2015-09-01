@@ -63,6 +63,11 @@ public class CellularTile extends QSTile<QSTile.SignalState> {
     }
 
     @Override
+    public boolean hasSensitiveData() {
+        return true;
+    }
+
+    @Override
     protected SignalState newTileState() {
         return new SignalState();
     }

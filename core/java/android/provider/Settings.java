@@ -4046,19 +4046,6 @@ public final class Settings {
         public static final String LIVE_DISPLAY_HINTED = "live_display_hinted";
 
         /**
-         * Option to launch slim actions in floating mode
-         * @hide
-         */
-        public static final String SLIM_ACTION_FLOATS = "slim_action_floats";
-
-        /**
-         * Launch headsup in floating window or not
-         *
-         * @hide
-         */
-        public static final String HEADS_UP_FLOATING = "heads_up_floating";
-
-        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *

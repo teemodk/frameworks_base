@@ -39,7 +39,6 @@ import com.android.internal.widget.BackgroundFallback;
 import com.android.internal.widget.DecorContentParent;
 import com.android.internal.widget.SwipeDismissLayout;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.content.Context;
@@ -3179,7 +3178,7 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         void updateWindowResizeState() {
             Drawable bg = getBackground();
             hackTurnOffWindowResizeAnim(bg == null || bg.getOpacity()
-                    != PixelFormat.OPAQUE || mIsFloatingWindow);
+                    != PixelFormat.OPAQUE);
         }
 
         @Override

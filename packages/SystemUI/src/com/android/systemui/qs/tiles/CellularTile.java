@@ -103,7 +103,7 @@ public class CellularTile extends QSTile<QSTile.SignalState> {
 
     @Override
     protected void handleLongClick() {
-        if (mDataController.isMobileDataSupported()) {
+        if (mController.isMobileDataSupported()) {
             showDetail(true);
         } else {
             if (mTelephonyManager.getDefault().getPhoneCount() > 1) {
